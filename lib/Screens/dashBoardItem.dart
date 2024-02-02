@@ -7,6 +7,10 @@ class DashboardItemWidget extends StatelessWidget {
 
   DashboardItemWidget({required this.item});
 
+  void handlePhoneButton() {
+    print("phoneButton clicked");
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,62 +19,94 @@ class DashboardItemWidget extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    ClaimProcessing()), // Replace SameerPage() with your actual Sameer.dart page class
+              builder: (context) => ClaimProcessing(selectedItem: item),
+            ), // Replace SameerPage() with your actual Sameer.dart page class
           );
         },
         child: Container(
           child: Card(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+                side: const BorderSide(
+                    width: 2, color: Color.fromARGB(255, 165, 11, 152))),
             elevation: 10,
-            margin: EdgeInsets.symmetric(vertical: 18),
+            margin: EdgeInsets.symmetric(vertical: 5),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(
-                  width: 30,
-                ),
-                const Column(
-                  children: [
-                    Icon(Icons.ac_unit_sharp),
-                    Text("Inside Column 1"),
-                  ],
-                ),
-                SizedBox(
-                  width: 30,
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                // SizedBox(
+                //     height: 150,
+                //     width: 100,
+                //     child: Image.asset(
+                //       'lib/assests/civic.jpg',
+                //       // fit: BoxFit.fitHeight,
+                //     )),
+                // SizedBox(
+                //   width: 10,
+                // ),
+                Image.asset(
+                  ('lib/assests/civic.jpg'),
+                  // scale: Checkbox.width,
+                  width: 150,
+                  // height: 190,
                 ),
                 Column(
-                  // mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
                     Text(
-                      'Request Number: ${item.requestNumber}',
-                      //style: TextStyle(fontWeight: FontWeight.bold),
+                      "${item.requestNumber}",
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Text('Customer Name: ${item.customerName}'),
-                    Text('Car Number: ${item.carNumber}'),
-                    Text('Car Name: ${item.carName}'),
-                    Text('Status: ${item.status}'),
+                    Text('${item.customerName}'),
+                    Text('${item.carNumber}'),
+                    Text('${item.carName}'),
+                    Text(
+                      '${item.status}',
+                      style: TextStyle(color: Colors.red.shade300),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Icon(Icons.phone),
+                        IconButton(
+                            onPressed: handlePhoneButton,
+                            icon: Icon(Icons.phone)),
+                        SizedBox(width: 10),
+                        IconButton(
+                            onPressed: handlePhoneButton,
+                            icon: Icon(Icons.mail_outline)),
+                        // Icon(Icons.mail_outline),
+                        SizedBox(width: 10),
+                        IconButton(
+                            onPressed: handlePhoneButton,
+                            icon: Icon(Icons.message_outlined)),
+                        // Icon(Icons.message_outlined),
+                      ],
+                    ),
                     const SizedBox(height: 10),
                   ],
                 ),
-                const SizedBox(
-                  width: 30,
-                ),
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(Icons.phone),
-                    Icon(Icons.mail_outline),
-                    Icon(Icons.message_outlined),
-                  ],
-                )
               ],
             ),
           ),
         ));
   }
 }
+
+  
+
+
+
+
+
+
+
 
 // class DashboardItemWidget extends StatelessWidget {
 //   final String requestNumber;

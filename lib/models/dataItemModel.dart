@@ -20,7 +20,7 @@ class ClaimsDashboardItems {
 
 List<ClaimsDashboardItems> dummyData = [
   const ClaimsDashboardItems(
-    requestNumber: 'R12345',
+    requestNumber: 'R123457890909090',
     customerName: 'John Doe',
     carNumber: 'ABC123',
     carName: 'Toyota Camry',
