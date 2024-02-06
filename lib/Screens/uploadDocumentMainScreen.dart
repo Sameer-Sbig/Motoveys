@@ -64,44 +64,92 @@ class _UploadDocumentsScreen extends State<UploadDocumentMainScreen> {
           //     )
           //   ],
           // ),
-          child: Column(
-            children: [
-              _buildRow("Claim Form", widthAllowed),
-              _buildRow("Crash Photos", widthAllowed)
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          "Cancel",
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        )),
+                    TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          "Upload",
+                          style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        )),
+                    SizedBox(
+                      width: 10,
+                    )
+                  ],
+                ),
+                _buildRow("Claim Form", widthAllowed),
+                _buildRow("Crash Photos", widthAllowed),
+                _buildRow("Driving License", widthAllowed),
+                _buildRow("Estimate", widthAllowed),
+                _buildRow("KYC Doc Address Proof", widthAllowed),
+                _buildRow("KYC Doc Id Proof", widthAllowed),
+                _buildRow("KYC Recent Photo", widthAllowed),
+                _buildRow("KYC First Impression-Internal", widthAllowed),
+                _buildRow("RC Book", widthAllowed),
+                _buildRow("Repair Bill", widthAllowed),
+                _buildRow("Survey Fees Bill", widthAllowed)
+              ],
+            ),
           ),
         ));
   }
 
 // building  fumctions for building multiple rows
   Widget _buildRow(String text, double givenWidth) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
+    return Container(
+      decoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(
+                  color: const Color.fromARGB(54, 0, 0, 0), width: 1.5))),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
               text,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
             ),
-          ),
-          SizedBox(width: givenWidth / 1.9),
-          IconButton(
-            onPressed: pickFileFunction,
-            icon: Icon(Icons.upload_file),
-          ),
-          IconButton(
-            onPressed: pickFileFunction,
-            icon: Icon(Icons.camera_alt_outlined),
-          ),
-          IconButton(
-            onPressed: pickFileFunction,
-            icon: Icon(Icons.photo_size_select_actual_outlined),
-          ),
-        ],
+            // SizedBox(width: givenWidth / 1.9),
+            Container(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: pickFileFunction,
+                  icon: Icon(Icons.upload_file),
+                ),
+                IconButton(
+                  onPressed: pickFileFunction,
+                  icon: Icon(Icons.camera_alt_outlined),
+                ),
+                IconButton(
+                  onPressed: pickFileFunction,
+                  icon: Icon(Icons.photo_size_select_actual_outlined),
+                ),
+              ],
+            )),
+          ],
+        ),
       ),
     );
   }

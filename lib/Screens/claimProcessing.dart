@@ -20,7 +20,7 @@ class ClaimProcessing extends StatelessWidget {
           children: [
             const Text('Claim Processing'),
             const SizedBox(height: 5),
-            Text("Request Number: ${selectedItem.requestNumber}")
+            Text("Request No: ${selectedItem.requestNumber}")
           ],
         ),
         backgroundColor: Color(0xFF610361),

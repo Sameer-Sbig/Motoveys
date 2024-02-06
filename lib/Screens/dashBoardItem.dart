@@ -26,10 +26,11 @@ class DashboardItemWidget extends StatelessWidget {
         child: Container(
           child: Card(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(12),
                 side: const BorderSide(
                     width: 2, color: Color.fromARGB(255, 165, 11, 152))),
             elevation: 10,
+            color: Colors.blueGrey.shade50,
             margin: EdgeInsets.symmetric(vertical: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -65,6 +66,32 @@ class DashboardItemWidget extends StatelessWidget {
                     Text('${item.customerName}'),
                     Text('${item.carNumber}'),
                     Text('${item.carName}'),
+                    Text(
+                      'Maruti Suzuki Authorised Service Center',
+                      style: TextStyle(fontSize: 10),
+                      // softWrap: false,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    // const Expanded(
+                    //   child: Row(
+                    //     children: [
+                    //       Flexible(
+                    //         child: Text(
+                    //           'Maruti Suzuki Authorised Service Center',
+                    //           softWrap: false,
+                    //           maxLines: 4,
+                    //           overflow: TextOverflow.ellipsis,
+                    //           style: TextStyle(
+                    //               fontSize: 14,
+                    //               letterSpacing: 2,
+                    //               fontWeight: FontWeight.bold,
+                    //               color: Color.fromRGBO(0, 0, 0, 1)),
+                    //         ),
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
                     Text(
                       '${item.status}',
                       style: TextStyle(color: Colors.red.shade300),
