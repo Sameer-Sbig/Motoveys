@@ -1,14 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:motoveys/Screens/claimProcessing.dart';
 import 'package:motoveys/models/dataItemModel.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DashboardItemWidget extends StatelessWidget {
   final ClaimsDashboardItems item;
 
   DashboardItemWidget({required this.item});
 
-  void handlePhoneButton() {
+  _handlePhoneButton() async {
     print("phoneButton clicked");
+    var url = Uri.parse("tel:+919769253131");
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url ';
+    }
+  }
+
+  _handleMailButton() async {
+    print("mailButton clicked");
+    var mail = 'example@example.com';
+    var url = Uri.parse("mailto:$mail");
+
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url ';
+    }
+  }
+
+  _handleTextMessage() async {
+    print("text button clicked");
+    var url = Uri.parse("sms:+919769253131");
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url ';
+    }
   }
 
   @override
@@ -31,7 +60,7 @@ class DashboardItemWidget extends StatelessWidget {
                     width: 2, color: Color.fromARGB(255, 165, 11, 152))),
             elevation: 10,
             color: Colors.blueGrey.shade50,
-            margin: EdgeInsets.symmetric(vertical: 5),
+            margin: const EdgeInsets.symmetric(vertical: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -66,7 +95,7 @@ class DashboardItemWidget extends StatelessWidget {
                     Text('${item.customerName}'),
                     Text('${item.carNumber}'),
                     Text('${item.carName}'),
-                    Text(
+                    const Text(
                       'Maruti Suzuki Authorised Service Center',
                       style: TextStyle(fontSize: 10),
                       // softWrap: false,
@@ -101,18 +130,109 @@ class DashboardItemWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Icon(Icons.phone),
-                        IconButton(
-                            onPressed: handlePhoneButton,
-                            icon: Icon(Icons.phone)),
-                        SizedBox(width: 10),
-                        IconButton(
-                            onPressed: handlePhoneButton,
-                            icon: Icon(Icons.mail_outline)),
+                        // IconButton(
+                        //     onPressed: _handlePhoneButton,
+                        //     icon: Icon(
+                        //       Icons.phone,
+                        //       color: Colors.blue.shade300,
+                        //     )
+                        //     // icon: SvgPicture.asset(
+                        //     //   'lib/assests/phone.svg',
+                        //     //   width: 20,
+                        //     //   height: 10,
+                        //     // )
+                        //     ),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder(),
+                              padding: const EdgeInsets.all(6),
+                              backgroundColor: Colors.white,
+                              elevation: 7,
+                              // elevation is 10 by default
+                              shadowColor: Color.fromARGB(255, 107, 9, 116),
+                            ),
+                            onPressed: _handlePhoneButton,
+                            child: ShaderMask(
+                              shaderCallback: (Rect bounds) {
+                                return const LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Color.fromRGBO(112, 12, 121, 1),
+                                    Color.fromARGB(255, 32, 35, 202)
+                                  ],
+                                ).createShader(bounds);
+                              },
+                              child: const Icon(
+                                Icons.phone,
+                                size: 20,
+                              ),
+                            )),
+                        SizedBox(width: 6),
+                        // width is 10 if we use iconbutton
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder(),
+                              padding: const EdgeInsets.all(6),
+                              backgroundColor: Colors.white,
+                              elevation: 7,
+                              shadowColor: Color.fromARGB(255, 107, 9, 116),
+                            ),
+                            onPressed: _handleMailButton,
+                            child: ShaderMask(
+                              shaderCallback: (Rect bounds) {
+                                return const LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Color.fromRGBO(112, 12, 121, 1),
+                                    Color.fromARGB(255, 32, 35, 202)
+                                  ],
+                                ).createShader(bounds);
+                              },
+                              child: const Icon(
+                                Icons.mail_lock_outlined,
+                                size: 20,
+                              ),
+                            )),
+
+                        // IconButton(
+                        //     onPressed: _handleMailButton,
+                        //     icon: Icon(
+                        //       Icons.mail_outline,
+                        //       color: Colors.indigo.shade900,
+                        //     )),
                         // Icon(Icons.mail_outline),
-                        SizedBox(width: 10),
-                        IconButton(
-                            onPressed: handlePhoneButton,
-                            icon: Icon(Icons.message_outlined)),
+                        SizedBox(width: 6),
+                        //width is 10 by defaul
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder(),
+                              padding: const EdgeInsets.all(6),
+                              backgroundColor: Colors.white,
+                              elevation: 7,
+                              shadowColor: Color.fromARGB(255, 107, 9, 116),
+                            ),
+                            onPressed: _handlePhoneButton,
+                            child: ShaderMask(
+                              shaderCallback: (Rect bounds) {
+                                return const LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Color.fromRGBO(112, 12, 121, 1),
+                                    Color.fromARGB(255, 32, 35, 202)
+                                  ],
+                                ).createShader(bounds);
+                              },
+                              child: const Icon(
+                                Icons.message_outlined,
+                                size: 20,
+                              ),
+                            )),
+                        // IconButton(
+                        //     onPressed: _handleTextMessage,
+                        //     icon: Icon(Icons.message_outlined)),
                         // Icon(Icons.message_outlined),
                       ],
                     ),

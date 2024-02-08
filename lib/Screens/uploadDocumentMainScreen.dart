@@ -100,7 +100,7 @@ class _UploadDocumentsScreen extends State<UploadDocumentMainScreen> {
                 _buildRow("KYC Doc Address Proof", widthAllowed),
                 _buildRow("KYC Doc Id Proof", widthAllowed),
                 _buildRow("KYC Recent Photo", widthAllowed),
-                _buildRow("KYC First Impression-Internal", widthAllowed),
+                _buildRow("KYC First Impression \n Internal", widthAllowed),
                 _buildRow("RC Book", widthAllowed),
                 _buildRow("Repair Bill", widthAllowed),
                 _buildRow("Survey Fees Bill", widthAllowed)
@@ -125,7 +125,7 @@ class _UploadDocumentsScreen extends State<UploadDocumentMainScreen> {
             Text(
               text,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 13,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -134,18 +134,94 @@ class _UploadDocumentsScreen extends State<UploadDocumentMainScreen> {
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                IconButton(
-                  onPressed: pickFileFunction,
-                  icon: Icon(Icons.upload_file),
-                ),
-                IconButton(
-                  onPressed: pickFileFunction,
-                  icon: Icon(Icons.camera_alt_outlined),
-                ),
-                IconButton(
-                  onPressed: pickFileFunction,
-                  icon: Icon(Icons.photo_size_select_actual_outlined),
-                ),
+                // IconButton(
+                //   onPressed: pickFileFunction,
+                //   icon: Icon(Icons.upload_file),
+                // ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(2),
+                      backgroundColor: Colors.white,
+                      elevation: 2,
+                      shadowColor: Color.fromARGB(255, 107, 9, 116),
+                    ),
+                    onPressed: pickFileFunction,
+                    child: ShaderMask(
+                      shaderCallback: (Rect bounds) {
+                        return const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color.fromRGBO(121, 12, 12, 1),
+                            Color.fromARGB(255, 202, 32, 32)
+                          ],
+                        ).createShader(bounds);
+                      },
+                      child: const Icon(
+                        Icons.upload_file_outlined,
+                        size: 20,
+                      ),
+                    )),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(2),
+                      backgroundColor: Colors.white,
+                      elevation: 2,
+                      shadowColor: Color.fromARGB(255, 107, 9, 116),
+                    ),
+                    onPressed: pickFileFunction,
+                    child: ShaderMask(
+                      shaderCallback: (Rect bounds) {
+                        return const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color.fromRGBO(112, 12, 121, 1),
+                            Color.fromARGB(255, 32, 35, 202)
+                          ],
+                        ).createShader(bounds);
+                      },
+                      child: const Icon(
+                        Icons.camera_alt_outlined,
+                        size: 20,
+                      ),
+                    )),
+
+                // IconButton(
+                //   onPressed: pickFileFunction,
+                //   icon: Icon(Icons.camera_alt_outlined),
+                // ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(2),
+                      backgroundColor: Colors.white,
+                      elevation: 2,
+                      shadowColor: Color.fromARGB(255, 107, 9, 116),
+                    ),
+                    onPressed: pickFileFunction,
+                    child: ShaderMask(
+                      shaderCallback: (Rect bounds) {
+                        return const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color.fromRGBO(112, 12, 121, 1),
+                            Color.fromARGB(255, 32, 35, 202)
+                          ],
+                        ).createShader(bounds);
+                      },
+                      child: const Icon(
+                        Icons.photo_size_select_actual_outlined,
+                        size: 20,
+                      ),
+                    )),
+                // IconButton(
+                //   onPressed: pickFileFunction,
+                //   icon: Icon(Icons.photo_size_select_actual_outlined),
+                // ),
               ],
             )),
           ],

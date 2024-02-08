@@ -4,26 +4,6 @@ import 'package:motoveys/Screens/userProfile.dart';
 import '../models/dataItemModel.dart';
 import './dashBoardItem.dart';
 
-// class DashboardPage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Dashboard'),
-//         backgroundColor: const Color.fromARGB(255, 221, 227, 231),
-//       ),
-//       body: Padding(
-//         padding: EdgeInsets.all(16.0),
-//         child: ListView(
-//           children: [
-//             /
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class DashboardPage extends StatefulWidget {
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -72,7 +52,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => MyProfile(),
-                    ), // Replace SameerPage() with your actual Sameer.dart page class
+                    ),
                   );
                 },
               ),
