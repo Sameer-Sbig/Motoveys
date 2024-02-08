@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:motoveys/models/dataItemModel.dart';
+import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 
 class UploadDocumentMainScreen extends StatefulWidget {
   final ClaimsDashboardItems selectedItem;
@@ -12,8 +14,29 @@ class UploadDocumentMainScreen extends StatefulWidget {
 }
 
 class _UploadDocumentsScreen extends State<UploadDocumentMainScreen> {
+  late PlatformFile? _pickedFile;
   Future pickFileFunction() async {
     // final result = await
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['pdf'],
+      );
+
+      if (result != null) {
+        setState(() {
+          _pickedFile = result.files.first;
+        });
+
+        // You can access the file path using _pickedFile!.path
+        print('File picked: ${_pickedFile!.name}');
+      } else {
+        // User canceled the picker
+        print('File picking canceled.');
+      }
+    } catch (e) {
+      print('Error picking file: $e');
+    }
     print("in pickfile function");
   }
 

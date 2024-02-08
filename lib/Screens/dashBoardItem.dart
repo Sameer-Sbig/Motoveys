@@ -28,6 +28,18 @@ class DashboardItemWidget extends StatelessWidget {
     } else {
       throw 'Could not launch $url ';
     }
+    // final Uri params = Uri(
+    //   scheme: 'mailto',
+    //   path: 'email@example.com',
+    //   query:
+    //       'subject=App Feedback&body=App Version 3.23', //add subject and body here
+    // );
+
+    // if (await canLaunchUrl(params)) {
+    //   await launchUrl(params);
+    // } else {
+    //   throw 'Could not launch';
+    // }
   }
 
   _handleTextMessage() async {
@@ -213,7 +225,7 @@ class DashboardItemWidget extends StatelessWidget {
                               elevation: 7,
                               shadowColor: Color.fromARGB(255, 107, 9, 116),
                             ),
-                            onPressed: _handlePhoneButton,
+                            onPressed: _handleTextMessage,
                             child: ShaderMask(
                               shaderCallback: (Rect bounds) {
                                 return const LinearGradient(
