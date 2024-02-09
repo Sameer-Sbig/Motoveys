@@ -49,6 +49,10 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        
+    // other configurations
+    minSdkVersion 21 // or the required version
+
     }
 
     buildTypes {

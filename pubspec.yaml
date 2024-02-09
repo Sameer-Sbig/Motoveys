@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   file_picker: ^5.2.6
   url_launcher: ^6.2.4
+  flutter_camera: ^1.0.0
  
 
 dev_dependencies:

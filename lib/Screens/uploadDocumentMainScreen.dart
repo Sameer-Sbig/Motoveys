@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:motoveys/Screens/cameraScreen.dart';
 import 'package:motoveys/models/dataItemModel.dart';
-import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:camera/camera.dart';
 
 class UploadDocumentMainScreen extends StatefulWidget {
   final ClaimsDashboardItems selectedItem;
@@ -38,6 +39,18 @@ class _UploadDocumentsScreen extends State<UploadDocumentMainScreen> {
       print('Error picking file: $e');
     }
     print("in pickfile function");
+  }
+
+  Future openCameraFunction() async {
+    print('Camera button pressed');
+    final cameras = await availableCameras();
+    final firstCamera = cameras.first;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CameraScreen(camera: firstCamera),
+      ),
+    );
   }
 
   @override
@@ -194,7 +207,7 @@ class _UploadDocumentsScreen extends State<UploadDocumentMainScreen> {
                       elevation: 2,
                       shadowColor: Color.fromARGB(255, 107, 9, 116),
                     ),
-                    onPressed: pickFileFunction,
+                    onPressed: openCameraFunction,
                     child: ShaderMask(
                       shaderCallback: (Rect bounds) {
                         return const LinearGradient(
