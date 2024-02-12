@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:motoveys/Screens/cameraScreen.dart';
 import 'package:motoveys/models/dataItemModel.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:camera/camera.dart';
 
 class UploadDocumentMainScreen extends StatefulWidget {
@@ -16,7 +19,7 @@ class UploadDocumentMainScreen extends StatefulWidget {
 
 class _UploadDocumentsScreen extends State<UploadDocumentMainScreen> {
   late PlatformFile? _pickedFile;
-  Future pickFileFunction() async {
+  Future pickFileFunction(String documentName) async {
     // final result = await
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -25,32 +28,61 @@ class _UploadDocumentsScreen extends State<UploadDocumentMainScreen> {
       );
 
       if (result != null) {
-        setState(() {
-          _pickedFile = result.files.first;
-        });
-
-        // You can access the file path using _pickedFile!.path
-        print('File picked: ${_pickedFile!.name}');
+        File file = File(result.files.single.path!);
+        _saveFile(file, documentName);
+        print('File picked: ${result.files.single.name}');
       } else {
-        // User canceled the picker
         print('File picking canceled.');
       }
     } catch (e) {
       print('Error picking file: $e');
     }
-    print("in pickfile function");
   }
 
-  Future openCameraFunction() async {
-    print('Camera button pressed');
-    final cameras = await availableCameras();
-    final firstCamera = cameras.first;
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CameraScreen(camera: firstCamera),
-      ),
-    );
+  Future<void> _saveFile(File file, String documentName) async {
+    Directory directory = await getApplicationDocumentsDirectory();
+    String folderName = widget.selectedItem.requestNumber;
+
+    Directory itemDirectory = Directory('${directory.path}/$folderName');
+    if (!await itemDirectory.exists()) {
+      await itemDirectory.create(recursive: true);
+    }
+
+    String fileName = '${documentName.replaceAll(' ', '_')}.pdf';
+    String filePath = '${itemDirectory.path}/$fileName';
+    await file.copy(filePath);
+
+    print('File saved: $fileName');
+  }
+
+  Future openCameraFunction(String documentName) async {
+    // print('Camera button pressed');
+    // final cameras = await availableCameras();
+    // final firstCamera = cameras.first;
+    try {
+      final cameras = await availableCameras();
+      final firstCamera = cameras.first;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CameraScreen(
+            camera: firstCamera,
+            onPictureTaken: (File file) {
+              _saveFile(file, documentName);
+            },
+          ),
+        ),
+      );
+    } catch (e) {
+      print('Error opening camera: $e');
+    }
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => CameraScreen(camera: firstCamera),
+    //   ),
+    // );
   }
 
   @override
@@ -182,7 +214,7 @@ class _UploadDocumentsScreen extends State<UploadDocumentMainScreen> {
                       elevation: 2,
                       shadowColor: Color.fromARGB(255, 107, 9, 116),
                     ),
-                    onPressed: pickFileFunction,
+                    onPressed: () => pickFileFunction(text),
                     child: ShaderMask(
                       shaderCallback: (Rect bounds) {
                         return const LinearGradient(
@@ -207,7 +239,7 @@ class _UploadDocumentsScreen extends State<UploadDocumentMainScreen> {
                       elevation: 2,
                       shadowColor: Color.fromARGB(255, 107, 9, 116),
                     ),
-                    onPressed: openCameraFunction,
+                    onPressed: () => openCameraFunction(text),
                     child: ShaderMask(
                       shaderCallback: (Rect bounds) {
                         return const LinearGradient(
@@ -237,7 +269,7 @@ class _UploadDocumentsScreen extends State<UploadDocumentMainScreen> {
                       elevation: 2,
                       shadowColor: Color.fromARGB(255, 107, 9, 116),
                     ),
-                    onPressed: pickFileFunction,
+                    onPressed: () => pickFileFunction(text),
                     child: ShaderMask(
                       shaderCallback: (Rect bounds) {
                         return const LinearGradient(

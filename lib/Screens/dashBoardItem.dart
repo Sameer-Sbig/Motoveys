@@ -3,11 +3,17 @@ import 'package:motoveys/Screens/claimProcessing.dart';
 import 'package:motoveys/models/dataItemModel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DashboardItemWidget extends StatelessWidget {
+class DashboardItemWidget extends StatefulWidget {
   final ClaimsDashboardItems item;
+  var searchIsOn;
 
-  DashboardItemWidget({required this.item});
+  DashboardItemWidget({required this.item, required this.searchIsOn});
 
+  @override
+  State<DashboardItemWidget> createState() => _DashboardItemWidgetState();
+}
+
+class _DashboardItemWidgetState extends State<DashboardItemWidget> {
   _handlePhoneButton() async {
     print("phoneButton clicked");
     var url = Uri.parse("tel:+919769253131");
@@ -60,7 +66,7 @@ class DashboardItemWidget extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ClaimProcessing(selectedItem: item),
+              builder: (context) => ClaimProcessing(selectedItem: widget.item),
             ), // Replace SameerPage() with your actual Sameer.dart page class
           );
         },
@@ -101,12 +107,12 @@ class DashboardItemWidget extends StatelessWidget {
                   children: [
                     const SizedBox(height: 10),
                     Text(
-                      "${item.requestNumber}",
+                      "${widget.item.requestNumber}",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Text('${item.customerName}'),
-                    Text('${item.carNumber}'),
-                    Text('${item.carName}'),
+                    Text('${widget.item.customerName}'),
+                    Text('${widget.item.carNumber}'),
+                    Text('${widget.item.carName}'),
                     const Text(
                       'Maruti Suzuki Authorised Service Center',
                       style: TextStyle(fontSize: 10),
@@ -134,7 +140,7 @@ class DashboardItemWidget extends StatelessWidget {
                     //   ),
                     // ),
                     Text(
-                      '${item.status}',
+                      '${widget.item.status}',
                       style: TextStyle(color: Colors.red.shade300),
                     ),
                     const SizedBox(height: 10),
