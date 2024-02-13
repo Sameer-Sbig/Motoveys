@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:motoveys/Screens/surveyorDetails.dart';
+import 'package:motoveys/Screens/surveyorDetailsMain.dart';
 import 'package:motoveys/Screens/uploadDocumentMainScreen.dart';
 import 'package:motoveys/models/dataItemModel.dart';
 // import 'screen2.dart'; // Import the screen2 file
@@ -47,12 +49,15 @@ class ClaimProcessing extends StatelessWidget {
               ),
               SizedBox(width: 16.0),
               Expanded(
-                child: _buildElevatedButton(context, "Survey Details Document",
-                    () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => Screen2()),
-                  // );
+                child: _buildElevatedButton(
+                    context, "Surveyor Processing Details", () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SurveyorDetailsMain(
+                              selectedItem: selectedItem,
+                            )),
+                  );
                 }, Icons.playlist_add_outlined),
               ),
               SizedBox(width: 16.0),
