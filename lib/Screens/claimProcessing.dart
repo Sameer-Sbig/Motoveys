@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motoveys/Screens/policy&ClaimDetails.dart';
 import 'package:motoveys/Screens/surveyorDetails.dart';
 import 'package:motoveys/Screens/surveyorDetailsMain.dart';
 import 'package:motoveys/Screens/uploadDocumentMainScreen.dart';
@@ -64,10 +65,12 @@ class ClaimProcessing extends StatelessWidget {
               Expanded(
                 child:
                     _buildElevatedButton(context, "Policy & Claim Details", () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => Screen3()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PolicyDetails(selectedItem: selectedItem)),
+                  );
                 }, Icons.perm_device_info),
               ),
               // SizedBox(width: 16),

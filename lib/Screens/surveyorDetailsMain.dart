@@ -225,6 +225,10 @@ class _SurveyorDetailsMain extends State<SurveyorDetailsMain> {
     }
   }
 
+  // ***** now starting with amount controllers ******
+  final _computedAmountController = TextEditingController();
+  final _estimatedAmountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -262,26 +266,25 @@ class _SurveyorDetailsMain extends State<SurveyorDetailsMain> {
               // ),
               Padding(
                 padding: const EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Dates',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                          width: 2,
+                          color: Color(
+                              0xFF610361)), // Add border to the bottom side
                     ),
-                    // SizedBox(width: 10), // Add spacing between Text and Border
-                    Container(
-                      height: 40, // Adjust the height of the border as needed
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                              width: 4,
-                              color: Colors
-                                  .black), // Add border to the bottom side
-                        ),
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Dates',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                    ),
-                  ],
+                      // SizedBox(width: 10), // Add spacing between Text and Border
+                    ],
+                  ),
                 ),
               ),
               Expanded(
@@ -481,6 +484,78 @@ class _SurveyorDetailsMain extends State<SurveyorDetailsMain> {
                         ],
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                                width: 2,
+                                color: Color(
+                                    0xFF610361)), // Add border to the bottom side
+                          ),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Amount',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.all(5),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 55,
+                              child: TextFormField(
+                                controller: _computedAmountController,
+                                maxLength: 6,
+                                keyboardType: TextInputType.number,
+                                decoration: const InputDecoration(
+                                  prefixText: '\$ ',
+                                  label: Text('Computed Amount'),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 55,
+                              child: TextFormField(
+                                controller: _estimatedAmountController,
+                                maxLength: 6,
+                                keyboardType: TextInputType.number,
+                                decoration: const InputDecoration(
+                                  prefixText: '\$ ',
+                                  label: Text('Estimated Amount'),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            45, 0, 45, 0),
+                                        foregroundColor: Colors.white,
+                                        backgroundColor: Color(0xFF610361)),
+                                    onPressed: () =>
+                                        {print('Submit button clicked')},
+                                    child: Text('Submit')),
+                              ],
+                            )
+                          ],
+                        )),
                   ],
                 ),
               ),
