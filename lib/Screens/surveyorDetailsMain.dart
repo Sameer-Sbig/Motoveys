@@ -12,34 +12,6 @@ class SurveyorDetailsMain extends StatefulWidget {
 }
 
 class _SurveyorDetailsMain extends State<SurveyorDetailsMain> {
-  // List<DateTime?> _datesPicked = [];
-
-  // void _presentDatePicker(int index) async {
-  //   final now = DateTime.now();
-  //   final firstDate = DateTime(now.year - 1, now.month, now.day);
-  //   final lastDate = now;
-
-  //   List<DateTime?> pickedDates = [];
-
-  //   // Loop through the dates
-  //   for (int i = 0; i < 7; i++) {
-  //     final pickedDate = await showDatePicker(
-  //       context: context,
-  //       initialDate: now,
-  //       firstDate: firstDate,
-  //       lastDate: lastDate,
-  //     );
-
-  //     if (pickedDate != null) {
-  //       pickedDates.add(pickedDate);
-  //     }
-  //   }
-  //   // print(pickedDates);
-  //   setState(() {
-  //     _datesPicked = pickedDates;
-  //     print(_datesPicked);
-  //   });
-  // }
   DateTime? _datePicked;
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
   final DateFormat formatter1 = DateFormat('yyyy-MM-dd HH:mm');
@@ -61,23 +33,22 @@ class _SurveyorDetailsMain extends State<SurveyorDetailsMain> {
     });
   }
 
-  DateTime? _datePicked1;
-  // final DateFormat formatter = DateFormat('yyyy-MM-dd');
-  void _presentDatePicker1() async {
-    final now = DateTime.now();
-    final firstDate = DateTime(now.year - 1, now.month, now.day);
-    final lastDate = now;
+  TimeOfDay? _SurveyTime;
 
-    final pickedDate = await showDatePicker(
+  void _SurveyTimePicker() async {
+    final now = TimeOfDay.now();
+
+    final pickedTime = await showTimePicker(
       context: context,
-      initialDate: now,
-      firstDate: firstDate,
-      lastDate: lastDate,
+      initialTime: now,
     );
-    setState(() {
-      _datePicked1 = pickedDate;
-      print(_datePicked1);
-    });
+
+    if (pickedTime != null) {
+      setState(() {
+        _SurveyTime = pickedTime;
+        print(_SurveyTime);
+      });
+    }
   }
 
   DateTime? _datePicked2;
@@ -217,6 +188,43 @@ class _SurveyorDetailsMain extends State<SurveyorDetailsMain> {
     });
   }
 
+  DateTime? _VehicleReportDate;
+  void _VehicleReportDatePicker() async {
+    final now = DateTime.now();
+    final firstDate = DateTime(now.year - 1, now.month, now.day);
+    final lastDate = now;
+
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: firstDate,
+      lastDate: lastDate,
+    );
+    setState(() {
+      _VehicleReportDate = pickedDate;
+      print(_VehicleReportDate);
+    });
+  }
+
+  // DateTime? _VehicleReportTime;
+  TimeOfDay? _VehicleReportTime;
+
+  void _VehicleReportTimePicker() async {
+    final now = TimeOfDay.now();
+
+    final pickedTime = await showTimePicker(
+      context: context,
+      initialTime: now,
+    );
+
+    if (pickedTime != null) {
+      setState(() {
+        _VehicleReportTime = pickedTime;
+        print(_VehicleReportTime);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -232,62 +240,7 @@ class _SurveyorDetailsMain extends State<SurveyorDetailsMain> {
         ),
         backgroundColor: const Color(0xFF610361),
       ),
-      body:
-          //  Column(
-          //   children: [
-          //     Container(
-          //       height: 50,
-          //       child: Card(
-          //         // color: Color.fromARGB(255, 219, 197, 219),
-          //         elevation: 0, // Add elevation if needed
-          //         shape: RoundedRectangleBorder(
-          //           // You can customize the shape of the Card as needed
-          //           borderRadius: BorderRadius.circular(0),
-          //           side: BorderSide(color: Colors.grey, width: 1.0),
-          //         ),
-          //         child: Padding(
-          //           padding: const EdgeInsets.all(20),
-          //           child: Text("Dates"),
-          //         ),
-          //       ),
-          //     ),
-          //     Container(
-          //       child: Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           Row(
-          //             children: [
-          //               Expanded(
-          //                 child: Container(
-          //                   padding: EdgeInsets.all(10),
-          //                   child: Text(_datePicked == null
-          //                       ? 'No date selected'
-          //                       : formatter.format(_datePicked!)),
-          //                 ),
-          //               ),
-          //               IconButton(
-          //                   onPressed: _presentDatePicker,
-          //                   icon: Icon(Icons.calendar_month_outlined)),
-          //               Expanded(
-          //                 child: Container(
-          //                   padding: EdgeInsets.all(10),
-          //                   child: Text(_datePicked1 == null
-          //                       ? 'No date selected'
-          //                       : formatter.format(_datePicked1!)),
-          //                 ),
-          //               ),
-          //               IconButton(
-          //                   onPressed: _presentDatePicker1,
-          //                   icon: Icon(Icons.calendar_month_outlined)),
-          //             ],
-          //           ),
-          //           Expanded(child: Text("Heheh"))
-          //         ],
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          SafeArea(
+      body: SafeArea(
         child: SizedBox(
           height:
               MediaQuery.of(context).size.height, // or any other fixed height
@@ -347,23 +300,37 @@ class _SurveyorDetailsMain extends State<SurveyorDetailsMain> {
                             child: Container(
                               padding: const EdgeInsets.all(10),
                               child: Text(_datePicked == null
-                                  ? 'No date selected'
+                                  ? 'Survey Date'
                                   : formatter.format(_datePicked!)),
                             ),
                           ),
                           IconButton(
                               onPressed: _presentDatePicker,
                               icon: const Icon(Icons.calendar_month_outlined)),
+                          // Expanded(
+                          //   child: Container(
+                          //     padding: const EdgeInsets.all(10),
+                          //     child: Text(_datePicked1 == null
+                          //         ? 'Survey Time'
+                          //         : formatter.format(_datePicked1!)),
+                          //   ),
+                          // ),
+                          // IconButton(
+                          //     onPressed: _presentDatePicker1,
+                          //     icon: const Icon(Icons.calendar_month_outlined)),
                           Expanded(
                             child: Container(
                               padding: const EdgeInsets.all(10),
-                              child: Text(_datePicked1 == null
-                                  ? 'No date selected'
-                                  : formatter.format(_datePicked1!)),
+                              // child: Text(_VehicleReportTime == null
+                              //     ? 'Vehical Report Time'
+                              //     : formatter.format(_VehicleReportTime!)),
+                              child: Text(_SurveyTime == null
+                                  ? 'Survey Time'
+                                  : '${_SurveyTime!.hour}:${_SurveyTime!.minute}'),
                             ),
                           ),
                           IconButton(
-                              onPressed: _presentDatePicker1,
+                              onPressed: _SurveyTimePicker,
                               icon: const Icon(Icons.calendar_month_outlined)),
                         ],
                       ),
@@ -474,6 +441,42 @@ class _SurveyorDetailsMain extends State<SurveyorDetailsMain> {
                           ),
                           IconButton(
                               onPressed: _presentDatePicker6,
+                              icon: const Icon(Icons.calendar_month_outlined)),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                                  color: Color.fromARGB(54, 0, 0, 0),
+                                  width: 1.5))),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              child: Text(_VehicleReportDate == null
+                                  ? 'Vehical Report Date'
+                                  : formatter.format(_VehicleReportDate!)),
+                            ),
+                          ),
+                          IconButton(
+                              onPressed: _VehicleReportDatePicker,
+                              icon: const Icon(Icons.calendar_month_outlined)),
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              // child: Text(_VehicleReportTime == null
+                              //     ? 'Vehical Report Time'
+                              //     : formatter.format(_VehicleReportTime!)),
+                              child: Text(_VehicleReportTime == null
+                                  ? 'Vehicle Report Time'
+                                  : '${_VehicleReportTime!.hour}:${_VehicleReportTime!.minute}'),
+                            ),
+                          ),
+                          IconButton(
+                              onPressed: _VehicleReportTimePicker,
                               icon: const Icon(Icons.calendar_month_outlined)),
                         ],
                       ),
