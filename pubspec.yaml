@@ -40,6 +40,9 @@ dependencies:
   flutter_camera: ^1.0.0
   path_provider: ^2.1.2
   intl: ^0.19.0
+  accordion: ^2.6.0
+  loading_animation_widget: ^1.2.1
+  flutter_custom_clippers: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +70,8 @@ flutter:
   assets:
     - lib/assests/civic.jpg
     - lib/assests/phone.svg
+    - lib/assests/sbilogo.png
+    - lib/assests/loginPage.png
 
     
 

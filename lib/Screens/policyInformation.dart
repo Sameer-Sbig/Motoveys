@@ -20,7 +20,7 @@ class PolicyInformation extends StatelessWidget {
             border: TableBorder.all(color: Colors.black, width: 0.5),
             children: [
               TableRow(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     'Policy Number',
@@ -28,16 +28,16 @@ class PolicyInformation extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     selectedItems.requestNumber,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 // Text(selectedItems.requestNumber)
               ]),
               TableRow(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     'Policy Effective From Date',
@@ -45,16 +45,16 @@ class PolicyInformation extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     selectedItems.requestNumber,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 // Text(selectedItems.requestNumber)
               ]),
               TableRow(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     'Policy Effective To Date',
@@ -71,7 +71,7 @@ class PolicyInformation extends StatelessWidget {
                 // Text(selectedItems.requestNumber)
               ]),
               TableRow(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     'Product Name',
@@ -88,7 +88,7 @@ class PolicyInformation extends StatelessWidget {
                 // Text(selectedItems.requestNumber)
               ]),
               TableRow(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     'Policy Type',
@@ -105,7 +105,7 @@ class PolicyInformation extends StatelessWidget {
                 // Text(selectedItems.requestNumber)
               ]),
               TableRow(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     'Add On',
@@ -113,16 +113,16 @@ class PolicyInformation extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     selectedItems.requestNumber,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 // Text(selectedItems.requestNumber)
               ]),
               TableRow(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     'Vehicle Model',
@@ -130,16 +130,16 @@ class PolicyInformation extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     selectedItems.carName,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 // Text(selectedItems.requestNumber)
               ]),
               TableRow(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     'Vehicle Make',
@@ -147,16 +147,16 @@ class PolicyInformation extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     selectedItems.requestNumber,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 // Text(selectedItems.requestNumber)
               ]),
               TableRow(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     'Chasis Number',
@@ -164,16 +164,16 @@ class PolicyInformation extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     selectedItems.requestNumber,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 // Text(selectedItems.requestNumber)
               ]),
               TableRow(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     'Enginee Number',
@@ -181,16 +181,16 @@ class PolicyInformation extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     selectedItems.requestNumber,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 // Text(selectedItems.requestNumber)
               ]),
               TableRow(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     'Manufacturing Year',
@@ -198,16 +198,16 @@ class PolicyInformation extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     selectedItems.requestNumber,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 // Text(selectedItems.requestNumber)
               ]),
               TableRow(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     'NCP Falsification/PYP Invalid',
@@ -215,10 +215,10 @@ class PolicyInformation extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Text(
                     selectedItems.requestNumber,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 // Text(selectedItems.requestNumber)

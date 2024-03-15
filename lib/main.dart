@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:motoveys/Screens/LoginPage.dart';
 import 'package:motoveys/Screens/claimsDashboard.dart';
+import 'package:motoveys/Screens/loginScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           scaffoldBackgroundColor: Color.fromARGB(255, 255, 251, 251)),
       debugShowCheckedModeBanner: false,
-      home: DashboardPage(),
+      home: SplashScreen(),
     );
   }
 }

@@ -15,7 +15,7 @@ class ClaimInformationScreen extends StatelessWidget {
           border: TableBorder.all(color: Colors.black, width: 0.5),
           children: [
             TableRow(children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Text(
                   'Master Claim Number',
