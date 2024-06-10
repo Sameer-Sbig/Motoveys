@@ -1,300 +1,424 @@
+import 'package:flutter/material.dart';
+
+import 'package:file_picker/file_picker.dart';
+
+import 'package:image_picker/image_picker.dart';
+
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:motoveys/Screens/cameraScreen.dart';
-import 'package:motoveys/models/dataItemModel.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:camera/camera.dart';
 
-class UploadDocumentMainScreen extends StatefulWidget {
-  final ClaimsDashboardItems selectedItem;
-  const UploadDocumentMainScreen({required this.selectedItem});
+
+
+class UploadDocuments1 extends StatefulWidget {
 
   @override
-  State<UploadDocumentMainScreen> createState() {
-    return _UploadDocumentsScreen();
-  }
+
+  _HomeScreenState createState() => _HomeScreenState();
+
 }
 
-class _UploadDocumentsScreen extends State<UploadDocumentMainScreen> {
-  late PlatformFile? _pickedFile;
-  Future pickFileFunction(String documentName) async {
-    // final result = await
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['pdf'],
-      );
+ 
 
-      if (result != null) {
-        File file = File(result.files.single.path!);
-        _saveFile(file, documentName);
-        print('File picked: ${result.files.single.name}');
-      } else {
-        print('File picking canceled.');
-      }
-    } catch (e) {
-      print('Error picking file: $e');
+class _HomeScreenState extends State<UploadDocuments1> {
+
+  final ImagePicker _picker = ImagePicker();
+
+  Map<String, Map<String, List<String>>> dataMap = {
+
+    "Accident Photos": {
+
+      "Crash": [],
+
+      "Kept Open": [],
+
+      "Other": [],
+
+      "Reinspection": [],
+
+      "Salvage": [],
+
+      "Spot_Photo": []
+
+    },
+
+    "Document Photos": {
+
+      "Bank Mandate_NEFT details": [],
+
+      "Chasis/Enginee Print": [],
+
+      "Claim Form": [],
+
+      "Closure Non Submission": [],
+
+      "Consent Letter": [],
+
+      "Consent Letter-NOS": [],
+
+      "Consent Non Settlement": [],
+
+      "Death Certificate": [],
+
+      "Deed of Subrogation": [],
+
+      "Discharge Voucher": [],
+
+      "Doc. Request Letter": [],
+
+      "Driving License": [],
+
+      "Estimate": [],
+
+      "Final Reminder": [],
+
+      "Final Report-Khatma": [],
+
+      "FIR": [],
+
+      "Fitness Certificate": [],
+
+      "Flash Report": [],
+
+      "Indemnity Bond": [],
+
+      "Insured KYC_AML documents": []
+
+    },
+
+    "Other Files": {
+
+      "Postmortem Report": [],
+
+      "Supplementary_Survey_Report": [],
+
+      "Survey Report": [],
+
+      "Untrace Report": []
+
     }
-  }
 
-  Future<void> _saveFile(File file, String documentName) async {
-    Directory directory = await getApplicationDocumentsDirectory();
-    String folderName = widget.selectedItem.requestNumber;
+  };
 
-    Directory itemDirectory = Directory('${directory.path}/$folderName');
-    if (!await itemDirectory.exists()) {
-      await itemDirectory.create(recursive: true);
-    }
+ 
 
-    String fileName = '${documentName.replaceAll(' ', '_')}.pdf';
-    String filePath = '${itemDirectory.path}/$fileName';
-    await file.copy(filePath);
+  String? selectedCategory;
 
-    print('File saved: $fileName');
-  }
+  String? selectedOption;
 
-  Future openCameraFunction(String documentName) async {
-    // print('Camera button pressed');
-    // final cameras = await availableCameras();
-    // final firstCamera = cameras.first;
-    try {
-      final cameras = await availableCameras();
-      final firstCamera = cameras.first;
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => CameraScreen(
-            camera: firstCamera,
-            onPictureTaken: (File file) {
-              _saveFile(file, documentName);
-            },
-          ),
-        ),
-      );
-    } catch (e) {
-      print('Error opening camera: $e');
-    }
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => CameraScreen(camera: firstCamera),
-    //   ),
-    // );
-  }
+ 
 
   @override
+
   Widget build(BuildContext context) {
-    double widthAllowed = MediaQuery.of(context).size.width;
+
     return Scaffold(
-        appBar: AppBar(
-          title: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text('Claim Processing'),
-              const SizedBox(height: 5),
-              Text(widget.selectedItem.requestNumber)
-            ],
-          ),
-          backgroundColor: Color(0xFF610361),
-        ),
-        body: Container(
-          decoration: const BoxDecoration(
-              border:
-                  Border(bottom: BorderSide(color: Colors.grey, width: 1.0))),
-          width: widthAllowed,
-          padding: EdgeInsets.only(left: 10),
-          // child: Row(
-          //   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   // mainAxisSize: widthAllowed,
-          //   children: [
-          //     const Text(
-          //       "Ganpati Bappa Morya",
-          //       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-          //     ),
-          //     SizedBox(width: widthAllowed / 2.5),
-          //     // FloatingActionButton(onPressed: pickFileFunction)
-          //     IconButton(
-          //       onPressed: pickFileFunction,
-          //       icon: Icon(Icons.upload_file),
-          //     ),
 
-          //     IconButton(
-          //       onPressed: pickFileFunction,
-          //       icon: Icon(Icons.camera_alt_outlined),
-          //     ),
-          //     IconButton(
-          //       onPressed: pickFileFunction,
-          //       icon: Icon(Icons.photo_size_select_actual_outlined),
-          //     )
-          //   ],
-          // ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "Cancel",
-                          style: TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                        )),
-                    TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "Upload",
-                          style: TextStyle(
-                              color: Colors.green,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                        )),
-                    SizedBox(
-                      width: 10,
-                    )
-                  ],
-                ),
-                _buildRow("Claim Form", widthAllowed),
-                _buildRow("Crash Photos", widthAllowed),
-                _buildRow("Driving License", widthAllowed),
-                _buildRow("Estimate", widthAllowed),
-                _buildRow("KYC Doc Address Proof", widthAllowed),
-                _buildRow("KYC Doc Id Proof", widthAllowed),
-                _buildRow("KYC Recent Photo", widthAllowed),
-                _buildRow("KYC First Impression \n Internal", widthAllowed),
-                _buildRow("RC Book", widthAllowed),
-                _buildRow("Repair Bill", widthAllowed),
-                _buildRow("Survey Fees Bill", widthAllowed)
-              ],
-            ),
-          ),
-        ));
-  }
+      appBar: AppBar(
+        title: 
+            const Text('Upload Documents' ,   style: TextStyle(
+    color: Colors.white,
 
-// building  fumctions for building multiple rows
-  Widget _buildRow(String text, double givenWidth) {
-    return Container(
-      decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(
-                  color: const Color.fromARGB(54, 0, 0, 0), width: 1.5))),
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              text,
-              style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            // SizedBox(width: givenWidth / 1.9),
-            Container(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                // IconButton(
-                //   onPressed: pickFileFunction,
-                //   icon: Icon(Icons.upload_file),
-                // ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(2),
-                      backgroundColor: Colors.white,
-                      elevation: 2,
-                      shadowColor: Color.fromARGB(255, 107, 9, 116),
-                    ),
-                    onPressed: () => pickFileFunction(text),
-                    child: ShaderMask(
-                      shaderCallback: (Rect bounds) {
-                        return const LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Color.fromRGBO(121, 12, 12, 1),
-                            Color.fromARGB(255, 202, 32, 32)
-                          ],
-                        ).createShader(bounds);
-                      },
-                      child: const Icon(
-                        Icons.upload_file_outlined,
-                        size: 20,
-                      ),
-                    )),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(2),
-                      backgroundColor: Colors.white,
-                      elevation: 2,
-                      shadowColor: Color.fromARGB(255, 107, 9, 116),
-                    ),
-                    onPressed: () => openCameraFunction(text),
-                    child: ShaderMask(
-                      shaderCallback: (Rect bounds) {
-                        return const LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Color.fromRGBO(112, 12, 121, 1),
-                            Color.fromARGB(255, 32, 35, 202)
-                          ],
-                        ).createShader(bounds);
-                      },
-                      child: const Icon(
-                        Icons.camera_alt_outlined,
-                        size: 20,
-                      ),
-                    )),
+  ),
+ ),
 
-                // IconButton(
-                //   onPressed: pickFileFunction,
-                //   icon: Icon(Icons.camera_alt_outlined),
-                // ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(2),
-                      backgroundColor: Colors.white,
-                      elevation: 2,
-                      shadowColor: Color.fromARGB(255, 107, 9, 116),
-                    ),
-                    onPressed: () => pickFileFunction(text),
-                    child: ShaderMask(
-                      shaderCallback: (Rect bounds) {
-                        return const LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Color.fromRGBO(112, 12, 121, 1),
-                            Color.fromARGB(255, 32, 35, 202)
-                          ],
-                        ).createShader(bounds);
-                      },
-                      child: const Icon(
-                        Icons.photo_size_select_actual_outlined,
-                        size: 20,
-                      ),
-                    )),
-                // IconButton(
-                //   onPressed: pickFileFunction,
-                //   icon: Icon(Icons.photo_size_select_actual_outlined),
-                // ),
-              ],
-            )),
-          ],
-        ),
+       
+          
+        backgroundColor: const Color(0xFF610361),
+        iconTheme: IconThemeData(color: Colors.white), 
       ),
+
+      body: SingleChildScrollView(
+
+        padding: const EdgeInsets.all(8.0),
+
+        child: Column(
+
+          crossAxisAlignment: CrossAxisAlignment.start,
+
+          children: [
+
+            _buildCategorySection(
+
+                'Accident Photos', dataMap['Accident Photos']!),
+
+            _buildCategorySection(
+
+                'Document Photos', dataMap['Document Photos']!),
+
+            _buildCategorySection('Other Files', dataMap['Other Files']!),
+
+          ],
+
+        ),
+
+      ),
+
     );
+
   }
+
+ 
+
+  Widget _buildCategorySection(
+
+      String title, Map<String, List<String>> options) {
+
+    return Column(
+
+      crossAxisAlignment: CrossAxisAlignment.start,
+
+      children: [
+
+        Text(title,
+
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+
+        _buildDropdownWithButton(title, options.keys.toList()),
+
+        if (selectedCategory == title && selectedOption != null)
+
+          _buildFileList(selectedCategory!, selectedOption!),
+
+      ],
+
+    );
+
+  }
+
+ 
+
+  Widget _buildDropdownWithButton(String category, List<String> options) {
+
+    return Row(
+
+      children: [
+
+        Expanded(
+
+          child: DropdownButton<String>(
+
+            hint: Text('Select Option'),
+            isExpanded: true,
+
+            value: selectedCategory == category ? selectedOption : null,
+
+            items: options.map((String key) {
+
+              return DropdownMenuItem<String>(
+
+                value: key,
+
+                child: Text(key),
+
+              );
+
+            }).toList(),
+
+            onChanged: (value) {
+
+              setState(() {
+
+                selectedCategory = category;
+
+                selectedOption = value;
+
+              });
+
+            },
+
+          ),
+
+        ),
+
+        ElevatedButton(
+
+          onPressed: () {
+
+            if (selectedCategory != null && selectedOption != null) {
+
+              _showImageSourceActionSheet(
+
+                  context, selectedCategory!, selectedOption!);
+
+            }
+
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(0xFF610361), 
+            foregroundColor: Colors.white,
+          ),
+          child: Text('Add Image'),
+
+        ),
+
+      ],
+
+    );
+
+  }
+
+ 
+
+  Widget _buildFileList(String category, String option) {
+
+    return ListView.builder(
+
+      shrinkWrap: true,
+
+      physics: NeverScrollableScrollPhysics(),
+
+      itemCount: dataMap[category]![option]!.length,
+
+      itemBuilder: (context, index) {
+
+        return ListTile(
+
+          leading: Image.file(
+
+            File(dataMap[category]![option]![index]),
+
+            width: 50,
+
+            height: 50,
+
+            fit: BoxFit.cover,
+
+          ),
+
+          title: Text(dataMap[category]![option]![index].split('/').last),
+
+        );
+
+      },
+
+    );
+
+  }
+
+ 
+
+  void _showImageSourceActionSheet(
+
+      BuildContext context, String category, String option) {
+
+    showModalBottomSheet(
+
+      context: context,
+
+      builder: (BuildContext context) {
+
+        return SafeArea(
+
+          child: Column(
+
+            mainAxisSize: MainAxisSize.min,
+
+            children: [
+
+              ListTile(
+
+                leading: Icon(Icons.camera_alt),
+
+                title: Text('Camera'),
+
+                onTap: () {
+
+                  Navigator.of(context).pop();
+
+                  _pickImage(ImageSource.camera, category, option);
+
+                },
+
+              ),
+
+              ListTile(
+
+                leading: Icon(Icons.photo_album),
+
+                title: Text('Gallery'),
+
+                onTap: () {
+
+                  Navigator.of(context).pop();
+
+                  _pickImage(ImageSource.gallery, category, option);
+
+                },
+
+              ),
+
+              ListTile(
+
+                leading: Icon(Icons.folder),
+
+                title: Text('File Manager'),
+
+                onTap: () {
+
+                  Navigator.of(context).pop();
+
+                  _pickImageFromFileManager(category, option);
+
+                },
+
+              ),
+
+            ],
+
+          ),
+
+        );
+
+      },
+
+    );
+
+  }
+
+ 
+
+  Future<void> _pickImage(
+
+      ImageSource source, String category, String option) async {
+
+    final pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+
+      setState(() {
+
+        dataMap[category]![option]!.add(pickedFile.path);
+
+      });
+
+    }
+
+  }
+
+ 
+
+  Future<void> _pickImageFromFileManager(String category, String option) async {
+
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+
+      type: FileType.image,
+
+    );
+
+ 
+
+    if (result != null) {
+
+      String filePath = result.files.single.path!;
+
+      setState(() {
+
+        dataMap[category]![option]!.add(filePath);
+
+      });
+
+    }
+
+  }
+
 }

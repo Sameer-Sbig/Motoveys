@@ -43,6 +43,7 @@ dependencies:
   accordion: ^2.6.0
   loading_animation_widget: ^1.2.1
   flutter_custom_clippers: ^2.1.0
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:

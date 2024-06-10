@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:motoveys/Screens/dlandRcDetails.dart';
 import 'package:motoveys/Screens/drivingLicense.dart';
 import 'package:motoveys/Screens/policy&ClaimDetails.dart';
+import 'package:motoveys/Screens/surveyorDetailForm.dart';
 import 'package:motoveys/Screens/surveyorDetails.dart';
 import 'package:motoveys/Screens/surveyorDetailsMain.dart';
 import 'package:motoveys/Screens/uploadDocumentMainScreen.dart';
@@ -20,12 +21,19 @@ class ClaimProcessing extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Claim Processing'),
+            const Text('Claim Processing' ,   style: TextStyle(
+    color: Colors.white,
+
+  ),
+ ),
             const SizedBox(height: 5),
-            Text("Request No: ${selectedItem.requestNumber}")
+            Text("Request No: ${selectedItem.requestNumber}" , style: TextStyle(
+    color: Colors.white,
+
+  ),) 
           ],
         ),
         backgroundColor: const Color(0xFF610361),
@@ -35,194 +43,27 @@ class ClaimProcessing extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height /
-                    5, // Set the desired fraction of the screen height
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child:
-                          _buildElevatedButton(context, "Upload Documents", () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => UploadDocumentMainScreen(
-                                  selectedItem: selectedItem)
-                              // UploadDocumentScreen()
-                              ),
-                        );
-                      }, Icons.upload_file_outlined, Colors.green),
-                    ),
-                    const SizedBox(width: 16.0),
-                    Expanded(
-                      child: _buildElevatedButton(
-                        context,
-                        "Surveyor Processing Details",
-                        () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SurveyorDetailsMain(
-                                      selectedItem: selectedItem,
-                                    )),
-                          );
-                        },
-                        Icons.playlist_add_outlined,
-                        Colors.red,
-                      ),
-                    ),
-                    const SizedBox(width: 16.0),
-                    Expanded(
-                      child: _buildElevatedButton(
-                        context,
-                        "Policy & Claim Details",
-                        () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    PolicyDetails(selectedItem: selectedItem)),
-                          );
-                        },
-                        Icons.perm_device_info,
-                        Colors.red,
-                      ),
-                    ),
-                    // SizedBox(width: 16),
-                  ],
-                ),
-              ),
+              Wrap(
+                spacing:10 , 
+                runSpacing : 15 , 
+                children: [
+                  _buildElevatedButton(context, 'Policy & Claim Details', (){}, Icons.perm_device_info, Colors.transparent),
+                  _buildElevatedButton(context, 'Surveyor Processing Details', (){
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SurveyorDataForm()));
+                  }, Icons.playlist_add_outlined, Colors.transparent),
+                  _buildElevatedButton(context, 'Upload Documents', (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => UploadDocuments1()));
+                  }, Icons.upload_file_outlined, Colors.transparent),
+                  _buildElevatedButton(context, 'DL & RC Details', (){}, Icons.domain_verification_rounded, Colors.transparent),
+                  _buildElevatedButton(context, 'Invoice Details', (){}, Icons.blinds_closed_rounded, Colors.transparent),
+                ],
+                
+              )
+             
+              ,
               const SizedBox(
-                height: 16,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 5,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                        child: _buildElevatedButton(
-                      context,
-                      'Claim Histoy',
-                      () {
-                        print('Claim History Pressed');
-                      },
-                      Icons.history,
-                      Colors.red,
-                    )),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    Expanded(
-                        child: _buildElevatedButton(
-                      context,
-                      'Insured Details',
-                      () {},
-                      Icons.person_3_outlined,
-                      Colors.red,
-                    )),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    Expanded(
-                        child: _buildElevatedButton(
-                      context,
-                      'DL & \n RC Details',
-                      () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => drivingLicense(
-                                  // selectedItem: selectedItem,
-                                  )),
-                        );
-                      },
-                      Icons.domain_verification_rounded,
-                      Colors.red,
-                    ))
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 5,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                        child: _buildElevatedButton(
-                            context, 'Point of \n Impact', () {
-                      print('Claim History Pressed');
-                    }, Icons.car_crash_outlined, Colors.green)),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    Expanded(
-                        child: _buildElevatedButton(
-                      context,
-                      'CP Loss',
-                      () {},
-                      Icons.note_alt_outlined,
-                      Colors.red,
-                    )),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    Expanded(
-                        child: _buildElevatedButton(
-                      context,
-                      'Claim Tracker',
-                      () {},
-                      Icons.mobile_friendly_outlined,
-                      Colors.transparent,
-                    ))
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 5,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                        child: _buildElevatedButton(context, 'Invoice Details',
-                            () {
-                      print('Claim History Pressed');
-                    }, Icons.blinds_closed_rounded, Colors.grey)),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    Expanded(
-                        child: _buildElevatedButton(
-                      context,
-                      'Computation Summary',
-                      () {},
-                      Icons.summarize_outlined,
-                      Colors.red,
-                    )),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    Expanded(
-                      child: _buildElevatedButton(
-                        context,
-                        'CIMA Details',
-                        () {},
-                        Icons.summarize_outlined,
-                        Colors.transparent,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 10,
+                height: 50,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -330,20 +171,21 @@ Widget _buildElevatedButton(BuildContext context, String buttonText,
     VoidCallback onPressed, IconData iconData, Color triangleColor) {
   return LayoutBuilder(
     builder: (context, constraints) {
-      double buttonWidth = constraints.maxWidth;
+      // double buttonWidth = constraints.maxWidth;
 
-      if (MediaQuery.of(context).size.width >= 600) {
-        buttonWidth = constraints.maxWidth * 0.5;
-      }
-
+      // if (MediaQuery.of(context).size.width >= 600) {
+      //   buttonWidth = constraints.maxWidth * 0.5;
+      // }
+    double availableWidth = MediaQuery.of(context).size.width;
+      double buttonWidth = availableWidth / 2.5;
       return Stack(
         alignment: Alignment.topRight,
         children: [
           ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
-              primary: Colors.blueGrey.shade50,
-              onPrimary: Colors.black,
+              // primary: Colors.blueGrey.shade50,
+              // onPrimary: Colors.black,
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
