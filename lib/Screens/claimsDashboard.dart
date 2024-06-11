@@ -540,6 +540,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey.shade50,
       drawer: SafeArea(
         child: Drawer(
           child: ListView(
@@ -623,6 +624,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       ),
       body: Padding(
+        
         padding: EdgeInsets.all(16.0),
         child: ListView.builder(
           itemCount: _filteredData.length,
@@ -646,7 +648,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             width: 2,
                             color: Color.fromARGB(255, 165, 11, 152))),
                     elevation: 10,
-                    color: Colors.blueGrey.shade50,
+                    color: Colors.white,
                     margin: const EdgeInsets.symmetric(vertical: 5),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

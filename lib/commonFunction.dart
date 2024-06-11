@@ -20,30 +20,35 @@ class CommonFunctions {
 
  
 
-      return Container(
-
-        decoration: BoxDecoration(
-
-            border: Border.all(width: 1.5, color: Colors.grey.shade400)),
-
-        child: TextFormField(
-
-          readOnly: true,
-
-          decoration: InputDecoration(
-
-            // icon: Icon(Icons.person),
-
-            contentPadding: EdgeInsets.all(10),
-
-            hintText: name,
-
-            // labelText: 'Surveyor Name: Ram Sharma',
-
+      return Column(
+        children: [
+          Container(
+          
+            decoration: BoxDecoration(
+          
+                border: Border.all(width: 1.5, color: Colors.grey.shade400)),
+          
+            child: TextFormField(
+          
+              readOnly: true,
+          
+              decoration: InputDecoration(
+          
+                // icon: Icon(Icons.person),
+          
+                contentPadding: EdgeInsets.all(10),
+          
+                hintText: name,
+          
+                // labelText: 'Surveyor Name: Ram Sharma',
+          
+              ),
+          
+            ),
+          
           ),
-
-        ),
-
+          SizedBox(height: 10,),
+        ],
       );
 
     });
@@ -54,72 +59,77 @@ class CommonFunctions {
 
   static Widget textField(BuildContext context, String label, int maxlines) {
 
-    return Container(
-
-      decoration: BoxDecoration(
-
-          border: Border.all(width: 1.5, color: Colors.grey.shade400)),
-
-      child: Padding(
-
-        padding: const EdgeInsets.all(10.0),
-
-        child: Column(
-
-          // mainAxisAlignment: MainAxisAlignment.start,
-
-          crossAxisAlignment: CrossAxisAlignment.start,
-
-          children: [
-
-            Text('${label}'),
-
-            TextFormField(
-
-              maxLines: maxlines,
-
-              cursorColor: Color(0xFF610361),
-
-              decoration: const InputDecoration(
-
-                // icon: Icon(Icons.person),
-
-                // hintText: 'Enter your observation',
-
-                // labelText: 'Surveyor Observation*',
-
-                contentPadding: EdgeInsets.all(10),
-
-                border: InputBorder.none,
-
-              ),
-
-              onSaved: (String? value) {
-
-                // This optional block of code can be used to run
-
-                // code when the user saves the form.
-
-              },
-
-              validator: (String? value) {
-
-                return (value != null && value.contains('@'))
-
-                    ? 'Do not use the @ char.'
-
-                    : null;
-
-              },
-
+    return Column(
+      children: [
+        Container(
+        
+          decoration: BoxDecoration(
+        
+              border: Border.all(width: 1.5, color: Colors.grey.shade400)),
+        
+          child: Padding(
+        
+            padding: const EdgeInsets.all(10.0),
+        
+            child: Column(
+        
+              // mainAxisAlignment: MainAxisAlignment.start,
+        
+              crossAxisAlignment: CrossAxisAlignment.start,
+        
+              children: [
+        
+                Text('${label}'),
+        
+                TextFormField(
+        
+                  maxLines: maxlines,
+        
+                  cursorColor: Color(0xFF610361),
+        
+                  decoration: const InputDecoration(
+        
+                    // icon: Icon(Icons.person),
+        
+                    // hintText: 'Enter your observation',
+        
+                    // labelText: 'Surveyor Observation*',
+        
+                    contentPadding: EdgeInsets.all(10),
+        
+                    border: InputBorder.none,
+        
+                  ),
+        
+                  onSaved: (String? value) {
+        
+                    // This optional block of code can be used to run
+        
+                    // code when the user saves the form.
+        
+                  },
+        
+                  validator: (String? value) {
+        
+                    return (value != null && value.contains('@'))
+        
+                        ? 'Do not use the @ char.'
+        
+                        : null;
+        
+                  },
+        
+                ),
+        
+              ],
+        
             ),
-
-          ],
-
+        
+          ),
+        
         ),
-
-      ),
-
+        SizedBox(height: 10,),
+      ],
     );
 
   }
