@@ -6,7 +6,7 @@ import 'package:motoveys/Screens/claimsDashboard.dart';
 import 'package:motoveys/Screens/loginPage.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const   SplashScreen({super.key});
 
   @override
 

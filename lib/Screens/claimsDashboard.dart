@@ -475,6 +475,7 @@
 import 'package:flutter/material.dart';
 import 'package:motoveys/Screens/claimProcessing.dart';
 import 'package:motoveys/Screens/dashBoardItem.dart';
+import 'package:motoveys/Screens/loginPage.dart';
 import 'package:motoveys/Screens/userProfile.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/dataItemModel.dart';
@@ -588,6 +589,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 leading: const Icon(Icons.person),
                 title: const Text("Log Out"),
                 onTap: () {
+                   Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginPage()));
                   print("Logout clicked!");
                 },
               ),
