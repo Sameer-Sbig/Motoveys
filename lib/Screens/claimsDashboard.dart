@@ -653,6 +653,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             color: Color.fromARGB(255, 165, 11, 152))),
                     elevation: 10,
                     color: Colors.white,
+                    surfaceTintColor: Colors.transparent,
                     margin: const EdgeInsets.symmetric(vertical: 5),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
